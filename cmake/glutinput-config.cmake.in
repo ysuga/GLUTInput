@@ -1,0 +1,54 @@
+# GLUTInput CMake config file
+#
+# This file sets the following variables:
+# GLUTInput_FOUND - Always TRUE.
+# GLUTInput_INCLUDE_DIRS - Directories containing the GLUTInput include files.
+# GLUTInput_IDL_DIRS - Directories containing the GLUTInput IDL files.
+# GLUTInput_LIBRARIES - Libraries needed to use GLUTInput.
+# GLUTInput_DEFINITIONS - Compiler flags for GLUTInput.
+# GLUTInput_VERSION - The version of GLUTInput found.
+# GLUTInput_VERSION_MAJOR - The major version of GLUTInput found.
+# GLUTInput_VERSION_MINOR - The minor version of GLUTInput found.
+# GLUTInput_VERSION_REVISION - The revision version of GLUTInput found.
+# GLUTInput_VERSION_CANDIDATE - The candidate version of GLUTInput found.
+
+message(STATUS "Found GLUTInput-@PROJECT_VERSION@")
+set(GLUTInput_FOUND TRUE)
+
+find_package(<dependency> REQUIRED)
+
+#set(GLUTInput_INCLUDE_DIRS
+#    "@CMAKE_INSTALL_PREFIX@/include/@PROJECT_NAME_LOWER@-@PROJECT_VERSION_MAJOR@"
+#    ${<dependency>_INCLUDE_DIRS}
+#    )
+#
+#set(GLUTInput_IDL_DIRS
+#    "@CMAKE_INSTALL_PREFIX@/include/@PROJECT_NAME_LOWER@-@PROJECT_VERSION_MAJOR@/idl")
+set(GLUTInput_INCLUDE_DIRS
+    "@CMAKE_INSTALL_PREFIX@/include/@CPACK_PACKAGE_FILE_NAME@"
+    ${<dependency>_INCLUDE_DIRS}
+    )
+set(GLUTInput_IDL_DIRS
+    "@CMAKE_INSTALL_PREFIX@/include/@CPACK_PACKAGE_FILE_NAME@/idl")
+
+
+if(WIN32)
+    set(GLUTInput_LIBRARIES
+        "@CMAKE_INSTALL_PREFIX@/@LIB_INSTALL_DIR@/@CMAKE_SHARED_LIBRARY_PREFIX@@PROJECT_NAME_LOWER@@CMAKE_STATIC_LIBRARY_SUFFIX@"
+        ${<dependency>_LIBRARIES}
+        )
+else(WIN32)
+    set(GLUTInput_LIBRARIES
+        "@CMAKE_INSTALL_PREFIX@/@LIB_INSTALL_DIR@/@CMAKE_SHARED_LIBRARY_PREFIX@@PROJECT_NAME_LOWER@@CMAKE_SHARED_LIBRARY_SUFFIX@"
+        ${<dependency>_LIBRARIES}
+        )
+endif(WIN32)
+
+set(GLUTInput_DEFINITIONS ${<dependency>_DEFINITIONS})
+
+set(GLUTInput_VERSION @PROJECT_VERSION@)
+set(GLUTInput_VERSION_MAJOR @PROJECT_VERSION_MAJOR@)
+set(GLUTInput_VERSION_MINOR @PROJECT_VERSION_MINOR@)
+set(GLUTInput_VERSION_REVISION @PROJECT_VERSION_REVISION@)
+set(GLUTInput_VERSION_CANDIDATE @PROJECT_VERSION_CANDIDATE@)
+
