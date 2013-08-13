@@ -54,6 +54,8 @@ else(${OpenRTM_FOUND})
   find_package(OpenRTM REQUIRED)
 endif(${OpenRTM_FOUND})
 
+find_package(GLUT REQUIRED)
+
 # Universal settings
 #enable_testing()
 

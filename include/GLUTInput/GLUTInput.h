@@ -31,6 +31,7 @@
 
 using namespace RTC;
 
+#include <glut.h>
 /*!
  * @class GLUTInput
  * @brief GLUTInput Component

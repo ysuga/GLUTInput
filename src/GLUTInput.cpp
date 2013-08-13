@@ -112,9 +112,49 @@ RTC::ReturnCode_t GLUTInput::onShutdown(RTC::UniqueId ec_id)
 }
 */
 
+void joystick(unsigned int ButtonMask, int x, int y, int z)
+{
+  //printf("XYZ\n");
+  std::cout << "XYZ" << std::endl;
+  /**
+  if(300<x) printf("Right");
+  if(x<-300) printf("Left");
+  
+  if(300<y) printf("上");
+  if(y<-300) printf("下");
+  
+  if(ButtonMask & 1) printf("△");
+  if(ButtonMask & 2) printf("○");
+  if(ButtonMask & 4) printf("×");
+  if(ButtonMask & 8) printf("□");
+  if(ButtonMask & 16) printf("L2");
+  if(ButtonMask & 32) printf("R2");
+  if(ButtonMask & 64) printf("L1");
+  if(ButtonMask & 128) printf("R1");
+  if(ButtonMask & 256) printf("START");
+  if(ButtonMask & 512) printf("SELECT");
+  */
+  glutPostRedisplay();
+}
+
+
+void idle(void)
+{
+  //printf ("idle\n");
+  std::cout << "idle" << std::endl;
+  glutForceJoystickFunc();
+}
 
 RTC::ReturnCode_t GLUTInput::onActivated(RTC::UniqueId ec_id)
 {
+  int argc = 1;
+  char* val[1] = {"GLUTInputComp"};
+  glutInit(&argc, val);
+  std::cout << "onActivated." << std::endl;
+  glutJoystickFunc(joystick, 10);
+  glutIdleFunc(idle);
+  //glutMainLoop();
+  std::cout << "okay." << std::endl;
   return RTC::RTC_OK;
 }
 
@@ -127,6 +167,8 @@ RTC::ReturnCode_t GLUTInput::onDeactivated(RTC::UniqueId ec_id)
 
 RTC::ReturnCode_t GLUTInput::onExecute(RTC::UniqueId ec_id)
 {
+  //std::cout << "onExecute" << std::endl;
+  glutForceJoystickFunc();
   return RTC::RTC_OK;
 }
 
